@@ -13,15 +13,10 @@
     <main>
         <section>
             <h2>確認する</h2>
-            <ul>
-                <?php
-                $db = new SQLite3('database.db');
-                $result = $db->query('SELECT id, title FROM posts');
-                while ($row = $result->fetchArray()) {
-                    echo "<li><a href='kakunin.php?id={$row['id']}'>{$row['title']}</a></li>";
-                }
-                ?>
-            </ul>
+            <select name = "kind" size ="1">
+                <option value="caffein">カフェイン</option>
+                <option value="snack">お菓子</option>
+            </select>
         <form>
             <input type = "button" value="確認する" onclick="location.href='kakunin.php'">
         </form>
