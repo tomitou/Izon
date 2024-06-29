@@ -7,25 +7,27 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <nav>
+    </nav>
     <header>
         <h1>投稿画面</h1>
     </header>
-    <nav>
-        <ul>
-            <li><a href="index.php">ホーム</a></li>
-            <li><a href="post.php">投稿</a></li>
-            <li><a href="select.php">投稿選択</a></li>
-        </ul>
-    </nav>
     <main>
-        <form action="submit_post.php" method="post">
-            <label for="title">タイトル:</label>
+        <form action="post.html" method="post">
+            <select name = "kind" size ="1">
+                <option value="caffein">カフェイン</option>
+                <option value="snack">お菓子</option>
+            </select>
+            <label for="title">使用量:</label>
             <input type="text" id="title" name="title" required>
+            <br>
             
+
             <label for="content">内容:</label>
             <textarea id="content" name="content" rows="4" required></textarea>
             
-            <button type="submit">投稿する</button>
+            <br>
+            <button type="submit">投稿して確認する</button>
         </form>
     </main>
     <footer>
@@ -33,3 +35,20 @@
     </footer>
 </body>
 </html>
+
+<!--ボタンを押した際にSQLに格納する-->
+<?php
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $title = $_POST['title'];
+    $content = $_POST['content'];
+
+    $db = new SQLite3('database.db');
+    $stmt = $db->prepare('INSERT INTO posts (title, content) VALUES (:title, :content)');
+    $stmt->bindValue(':title', $title, SQLITE3_TEXT);
+    $stmt->bindValue(':content', $content, SQLITE3_TEXT);
+    $stmt->execute();
+
+    header('Location: select.php');
+    exit;
+}
+?>

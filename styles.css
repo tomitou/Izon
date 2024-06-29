@@ -3,7 +3,8 @@
 /* 基本設定 */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f9;
+    /*background-color: #f4f4f9;*/
+    background: linear-gradient(180deg, #f4f4f9 0%, #f4f4f9 50%, #57948b 50%, #52a89b 100%);
     color: #333;
     margin: 0;
     padding: 0;
@@ -13,8 +14,11 @@ body {
     height: 100vh;
 }
 
+/*ヘッダー、フッター*/
 header, footer {
     text-align: center;
+    align-items: end;
+    height: min-content;
     padding: 1em;
     background-color: #333;
     color: #fff;
@@ -23,6 +27,10 @@ header, footer {
 
 header h1, footer p {
     margin: 0;
+}
+
+header h1{
+    font-size:x-large;
 }
 
 /* メインコンテンツのスタイル */
@@ -54,22 +62,25 @@ input[type="text"], textarea, select {
     font-size: 1em;
 }
 
-
 input[type="button"], textarea, select {
     width: 100%;
     padding: 0.5em;
-    border: 1px solid #ccc;
+    font-family: 'Courier New', Courier, monospace;
+    background-color: #e5eae7;
+    border: 1px solid #919e9794;
     border-radius: 5px;
     font-size: 1em;
+    cursor: pointer;
 }
 
 input[type="button"]:hover{
-    background-color: #a9a9a9;
+    background-color: #7d928794;
+    border: 1px solid #111;
 }
 
 button {
-    background-color: #4CAF50;
-    color: white;
+    background-color: #b2d6d3;
+    color: rgb(18, 23, 21);
     padding: 0.75em;
     border: none;
     border-radius: 5px;
@@ -79,10 +90,87 @@ button {
 }
 
 button:hover {
-    background-color: #45a049;
+    background-color: #4c8e86;
+}
+
+
+/*class, ID別のスタイル*/
+.calculate-result{
+    font-weight: bold;
 }
 
 /* スペース調整 */
 main form select, main form label, main form textarea, main form input, main form button {
     margin: 0.5em 0;
+}
+
+
+
+
+/*========= 画面遷移 ===========*/
+
+/*画面遷移アニメーション*/
+.splashbg{
+    display: none;
+}
+
+/*bodyにappearクラスがついたら出現*/
+body.appear .splashbg{
+    display: block;
+    content: "";
+    position:fixed;
+	z-index: 999;
+    width: 100%;
+    height: 100vh;
+    top: 0;
+	left: 0;
+    transform: scaleY(0);
+    background-color: #333;/*伸びる背景色の設定*/
+	animation-name:PageAnime;
+	animation-duration:1.2s;
+	animation-timing-function:ease-in-out;
+	animation-fill-mode:forwards;
+
+}
+
+@keyframes PageAnime{
+	0% {
+		transform-origin:bottom;
+		transform:scaleY(0);
+	}
+	50% {
+		transform-origin:bottom;
+		transform:scaleY(1);
+	}
+	50.001% {
+		transform-origin:top;
+	}
+	100% {
+		transform-origin:top;
+		transform:scaleY(0);
+	}
+}
+
+/*画面遷移の後現れるコンテンツ設定*/
+
+#container{
+	opacity: 0;/*はじめは透過0に*/
+}
+
+/*bodyにappearクラスがついたら出現*/
+body.appear #container{
+	animation-name:PageAnimeAppear;
+	animation-duration:1s;
+	animation-delay: 0.8s;
+	animation-fill-mode:forwards;
+	opacity: 0;
+}
+
+@keyframes PageAnimeAppear{
+	0% {
+	opacity: 0;
+	}
+	100% {
+	opacity: 1;
+}
 }
