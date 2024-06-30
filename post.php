@@ -13,18 +13,18 @@
         <h1>投稿画面</h1>
     </header>
     <main>
-        <form action="post.html" method="post">
+        <form action="restore_post.php" method="post">
             <select name = "kind" size ="1">
                 <option value="caffein">カフェイン</option>
                 <option value="snack">お菓子</option>
             </select>
             <label for="title">使用量:</label>
-            <input type="text" id="title" name="title" required>
+            <input type="text" id="amount" name="amount" required>
             <br>
             
 
             <label for="content">内容:</label>
-            <textarea id="content" name="content" rows="4" required></textarea>
+            <textarea id="comment" name="comment" rows="4" required></textarea>
             
             <br>
             <button type="submit">投稿して確認する</button>
@@ -35,20 +35,3 @@
     </footer>
 </body>
 </html>
-
-<!--ボタンを押した際にSQLに格納する-->
-<?php
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $title = $_POST['title'];
-    $content = $_POST['content'];
-
-    $db = new SQLite3('database.db');
-    $stmt = $db->prepare('INSERT INTO posts (title, content) VALUES (:title, :content)');
-    $stmt->bindValue(':title', $title, SQLITE3_TEXT);
-    $stmt->bindValue(':content', $content, SQLITE3_TEXT);
-    $stmt->execute();
-
-    header('Location: select.php');
-    exit;
-}
-?>

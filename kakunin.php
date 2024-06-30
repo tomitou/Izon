@@ -19,7 +19,31 @@
                 計算結果
             </h2>
         </article>
-        <p>あなたは<span class="calculate-result">〇〇mg</span>摂取しています……！！</p>
+
+        <?php
+        //ファイル読み込み
+        $f = fopen("data.csv", "r");
+
+        $total_amount = 0;
+
+        $first_skip = 0;
+        
+        //一行ずつ読み出し
+        while($line = fgetcsv($f)){
+            
+            if($first_skip == 0) {
+                $first_skip ++;
+                continue;
+            }
+
+            for($i = 0; $i<count($line); $i++){
+                if($i == 2) $total_amount += intval($line[$i]);
+            }
+        }
+
+        echo "<p>". "あなたは<span class='calculate-result'>" .$total_amount ."mg</span>摂取しています……！！</p>"
+        
+        ?>
     </div>
 
     <br>
@@ -29,23 +53,36 @@
     <div class ="memory">
         <article>
             <h2>過去の記録</h2>
+            
             <h3>投稿１</h3>
-            <p>ここに投稿内容が表示されます...</p>
+        <?php
+
+        //ファイル読み込み
+        $f = fopen("data.csv", "r");
+
+        $first_skip = 0;
+        
+        //一行ずつ読み出し
+        while($line = fgetcsv($f)){
+            
+            if($first_skip == 0) {
+                $first_skip ++;
+                continue;
+            }
+
+            for($i = 0; $i<count($line); $i++){
+                if($i == 3) echo"<p>". $line[$i] . "</p>";
+            }
+        }
+        ?>
         </article>
     </div>
-<!--おそらくここでDBにアクセスして過去の投稿を表示-->
-    <?php
-        $id = $_GET['id'];
-        $db = new SQLite3('database.db');
-        $stmt = $db->prepare('SELECT title, content FROM posts WHERE id = :id');
-        $stmt->bindValue(':id', $id, SQLITE3_INTEGER);
-        $result = $stmt->execute();
-        $post = $result->fetchArray();
-        ?>
-        <article>
-            <h2><?php echo htmlspecialchars($post['title']); ?></h2>
-            <p><?php echo nl2br(htmlspecialchars($post['content'])); ?></p>
-        </article>
+        
+    <form>
+            <a class="button" href="post.html"></a>
+            <input type = "button" class="button" value="戻る" onclick="location.href='home.html'">
+    </form>
+
     </main>
     <footer>
         <p>&copy; 2024 OMG</p>
