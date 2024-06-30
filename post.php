@@ -27,6 +27,8 @@
             
             <br>
             <button type = "submit">投稿して確認する</button>
+            <br>
+            <input type = "button" onclick = "history.back()" value = "戻る">
         </form>
     </main>
     <footer>
