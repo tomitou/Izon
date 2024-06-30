@@ -20,6 +20,8 @@
             </select>
             <button type="submit">選択したものを確認</button>
         </form>
+        <br>
+            <input type = "button" onclick = history.back() value ="戻る">
         </section>
     </main>
     <footer>
