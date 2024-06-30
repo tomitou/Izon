@@ -8,39 +8,38 @@
 </head>
 <body>
     <header>
-        <h1>投稿完了</h1>
+        <h1>投稿完了!</h1>
     </header>
     <main>
-        <form>
-            <a class="button" href="post.html"></a>
-            <input type = "button" class="button" value="戻る" onclick="location.href='home.html'">
+        <form action ="kakunin.php" method = "POST">
+            <?php
+            
+            $kind = $_POST['selected_kind'];
+
+            echo'<input type="hidden" name="selected_kind" value="'.$kind.'"  />';
+            ?>
+            <a class="button"></a>
+            <button type="submit">確認する</button>
         </form>
     </main>
-    <footer>
-        <p>&copy; 2024 OMG</p>
-    </footer>
-</body>
-</html>
-
-
-<?php
+    <?php
 // フォームからの入力データを取得
-$kind = $_POST['kind'];
+$kind = $_POST['selected_kind'];
 $amount = $_POST['amount'];
 $comment = $_POST['comment'];
 
 // CSVファイルのパスを指定
 $file = 'data.csv';
 
-//idを決める
-$id = 0;
-
 // 入力データをCSVファイルに追加
 $fileHandle = fopen($file, 'a');
-$data = [$id, $kind, $amount, $comment];
+$data = [$kind, $amount, $comment];
 fputcsv($fileHandle, $data);
 fclose($fileHandle);
-
-// 完了メッセージを表示
-echo "<p>データが保存されました。</p>";
 ?>
+
+    <footer>
+        <p>&copy; 2024 OMG</p>
+    </footer>
+</body>
+</html>

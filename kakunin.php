@@ -24,20 +24,26 @@
         //ファイル読み込み
         $f = fopen("data.csv", "r");
 
+        $selected_kind = $_POST['selected_kind'];
+
         $total_amount = 0;
 
-        $first_skip = 0;
+        $loop_num = 0;
         
         //一行ずつ読み出し
         while($line = fgetcsv($f)){
             
-            if($first_skip == 0) {
-                $first_skip ++;
+            if($loop_num == 0) {
+                $loop_num ++;
                 continue;
             }
 
+            //選択した種類以外の種類ならスキップ
+            if($line[0] != $selected_kind) continue;
+            
+
             for($i = 0; $i<count($line); $i++){
-                if($i == 2) $total_amount += intval($line[$i]);
+                if($i == 1) $total_amount += intval($line[$i]);
             }
         }
 
@@ -53,25 +59,39 @@
     <div class ="memory">
         <article>
             <h2>過去の記録</h2>
-            
-            <h3>投稿１</h3>
+    
         <?php
 
         //ファイル読み込み
         $f = fopen("data.csv", "r");
 
-        $first_skip = 0;
+        $loop_num = 0;
+
+        $selected_kind = $_POST['selected_kind'];
         
         //一行ずつ読み出し
         while($line = fgetcsv($f)){
             
-            if($first_skip == 0) {
-                $first_skip ++;
+            if($loop_num == 0) {
+                $loop_num ++;
                 continue;
             }
 
+            showcomment($line, $selected_kind);
+
+            $loop_num ++;
+        }
+
+        function showcomment($line, $selected_kind)
+        {
+            if($line[0] != $selected_kind) return;
+
             for($i = 0; $i<count($line); $i++){
-                if($i == 3) echo"<p>". $line[$i] . "</p>";
+                //コメントを記載
+                if($i == 2) {
+                    echo "<h3>過去の投稿</h3>";
+                    echo"<p>". $line[$i] . "</p>";
+                }
             }
         }
         ?>

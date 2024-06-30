@@ -1,7 +1,7 @@
-id,kind,amount,comment
-1,caffein,10,monena
-2,caffen,11,redbull
-3,caffen,11,うますぎ
-0,caffein,s,a
-0,caffein,100,飲まないと死ぬぜ！！！！！！
-0,caffein,10000,なんでこんなに美味しいんだ！！カフェイン！！！！！！
+kind,amount,comment
+caffein,10,monena
+caffen,11,redbull
+caffen,11,うますぎ
+caffein,s,a
+caffein,100,飲まないと死ぬぜ！！！！！！
+caffein,10000,なんでこんなに美味しいんだ！！カフェイン！！！！！！

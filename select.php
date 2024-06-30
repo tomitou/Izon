@@ -11,14 +11,14 @@
         <h1>選択画面</h1>
     </header>
     <main>
+        <form method="POST" action = "kakunin.php">
         <section>
             <h2>確認する</h2>
-            <select name = "kind" size ="1">
+            <select name = "selected_kind" size ="1">
                 <option value="caffein">カフェイン</option>
                 <option value="snack">お菓子</option>
             </select>
-        <form>
-            <input type = "button" value="確認する" onclick="location.href='kakunin.php'">
+            <button type="submit">選択したものを確認</button>
         </form>
         </section>
     </main>
