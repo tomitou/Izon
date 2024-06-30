@@ -30,12 +30,17 @@ $comment = $_POST['comment'];
 
 // CSVファイルのパスを指定
 $file = 'data.csv';
+$upload_time = date("Y-m-d H:i");
 
 // 入力データをCSVファイルに追加
 $fileHandle = fopen($file, 'a');
-$data = [$kind, $amount, $comment];
+$data = [$kind, $amount, $comment, $upload_time];
 fputcsv($fileHandle, $data);
 fclose($fileHandle);
+
+echo '<script>';
+    echo 'document.getElementById("message").innerHTML = "<p>データが保存されました。</p>";';
+    echo '</script>';
 ?>
 
     <footer>

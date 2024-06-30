@@ -86,13 +86,9 @@
         {
             if($line[0] != $selected_kind) return;
 
-            for($i = 0; $i<count($line); $i++){
-                //コメントを記載
-                if($i == 2) {
-                    echo "<h3>過去の投稿</h3>";
-                    echo"<p>". $line[$i] . "</p>";
-                }
-            }
+            echo "<h3>過去の投稿</h3>";
+            echo"<p>".$line[3]."</p>";
+            echo"<p>". $line[2] . "</p>";
         }
         ?>
         </article>
@@ -100,7 +96,7 @@
         
     <form>
             <a class="button" href="post.html"></a>
-            <input type = "button" class="button" value="戻る" onclick="location.href='home.html'">
+            <input type = "button" class="button" value="ホーム画面に戻る" onclick="location.href='home.html'">
     </form>
 
     </main>
